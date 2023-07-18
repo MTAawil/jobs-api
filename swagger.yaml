@@ -1,0 +1,283 @@
+openapi: 3.0.0
+info:
+  title: jobs-api
+  contact: {}
+  version: '1.0'
+servers:
+- url: https://jobs-api-wpeh.onrender.com/api/v1
+  variables: {}
+paths:
+  /AUTH/REGISTER:
+    post:
+      tags:
+      - Auth
+      summary: register
+      operationId: register
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/registerrequest'
+              - example:
+                  name: '43123124'
+                  email: 0000000000000erfxlcsdsa@gmail.com
+                  password: 0000000hjtyutu
+            example:
+              name: '43123124'
+              email: 0000000000000erfxlcsdsa@gmail.com
+              password: 0000000hjtyutu
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /AUTH/login:
+    post:
+      tags:
+      - Auth
+      summary: login
+      operationId: login
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/loginrequest'
+              - example:
+                  email: mq3e2asf1fgerfxlcsdsa@gmail.com
+                  password: asdasdasddsa
+            example:
+              email: mq3e2asf1fgerfxlcsdsa@gmail.com
+              password: asdasdasddsa
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /jobs:
+    post:
+      tags:
+      - jobs
+      summary: create job
+      operationId: createjob
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/createjobrequest'
+              - example:
+                  company: asads
+                  position: masdas
+            example:
+              company: asads
+              position: masdas
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    get:
+      tags:
+      - jobs
+      summary: get all jobs
+      operationId: getalljobs
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /jobs/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The job ID
+    get:
+      tags:
+      - jobs
+      summary: single job
+      operationId: singlejob
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    patch:
+      tags:
+      - jobs
+      summary: updatejob
+      operationId: updatejob
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/updatejobrequest'
+              - example:
+                  company: '222222'
+                  status: declined
+                  position: zabel
+            example:
+              company: '222222'
+              status: declined
+              position: zabel
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    delete:
+      tags:
+      - jobs
+      summary: delete job
+      operationId: deletejob
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+components:
+  schemas:
+    NewRequestRequest:
+      title: NewRequestRequest
+      required:
+      - name
+      - email
+      - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        name: mama
+        email: mq3e2asf1fgerfxlcsdsa@gmail.com
+        password: asdasdasddsa
+    registerrequest:
+      title: registerrequest
+      required:
+      - name
+      - email
+      - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        name: '43123124'
+        email: 0000000000000erfxlcsdsa@gmail.com
+        password: 0000000hjtyutu
+    loginrequest:
+      title: loginrequest
+      required:
+      - email
+      - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: mq3e2asf1fgerfxlcsdsa@gmail.com
+        password: asdasdasddsa
+    createjobrequest:
+      title: createjobrequest
+      required:
+      - company
+      - position
+      type: object
+      properties:
+        company:
+          type: string
+        position:
+          type: string
+      example:
+        company: asads
+        position: masdas
+    updatejobrequest:
+      title: updatejobrequest
+      required:
+      - company
+      - status
+      - position
+      type: object
+      properties:
+        company:
+          type: string
+        status:
+          type: string
+        position:
+          type: string
+      example:
+        company: '222222'
+        status: declined
+        position: zabel
+    deletejobrequest:
+      title: deletejobrequest
+      required:
+      - company
+      - status
+      - position
+      type: object
+      properties:
+        company:
+          type: string
+        status:
+          type: string
+        position:
+          type: string
+      example:
+        company: '       '
+        status: declined
+        position: zabel
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+security: []
+tags:
+- name: Misc
+  description: ''
+- name: Auth
+  description: ''
+- name: jobs
+  description: ''
